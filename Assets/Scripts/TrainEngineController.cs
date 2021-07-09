@@ -9,7 +9,7 @@ public class TrainEngineController : MonoBehaviour
     public float runSpeed;
     private Rigidbody2D rb;
     public Collider2D coll;
-    public float rotateZ;
+    public float 测试;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,15 +24,16 @@ public class TrainEngineController : MonoBehaviour
     void Movement()
     {
         float horizontalmove = Input.GetAxis("Horizontal");
+        测试 = Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad);
         //转动
         if (horizontalmove != 0)
         {
-            rotateZ = transform.rotation.z;
+ 
             transform.rotation = Quaternion.Euler(0f, 0f,  transform.eulerAngles.z+horizontalmove * rotationSpeed * Time.deltaTime) ;
         }
         if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x+runSpeed * Time.deltaTime* transform.rotation.x, rb.velocity.y + runSpeed * Time.deltaTime * transform.rotation.y);
+            rb.velocity = new Vector2(runSpeed * Time.deltaTime* Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad),  runSpeed * Time.deltaTime *Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad));
         }
     }
 }
