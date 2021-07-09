@@ -6,6 +6,7 @@ public class TrainEngineController : MonoBehaviour
 {
     private float faceDirection;
     public float rotationSpeed;
+    public float runSpeed;
     private Rigidbody2D rb;
     public Collider2D coll;
     public float rotateZ;
@@ -23,12 +24,15 @@ public class TrainEngineController : MonoBehaviour
     void Movement()
     {
         float horizontalmove = Input.GetAxis("Horizontal");
-        float faceDirection = Input.GetAxisRaw("Horizontal");
         //转动
         if (horizontalmove != 0)
         {
             rotateZ = transform.rotation.z;
             transform.rotation = Quaternion.Euler(0f, 0f,  transform.eulerAngles.z+horizontalmove * rotationSpeed * Time.deltaTime) ;
+        }
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.velocity = new Vector2(rb.velocity.x+runSpeed * Time.deltaTime* transform.rotation.x, rb.velocity.y + runSpeed * Time.deltaTime * transform.rotation.y);
         }
     }
 }
