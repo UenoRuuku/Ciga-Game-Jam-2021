@@ -29,11 +29,15 @@ public class TrainEngineController : MonoBehaviour
         if (horizontalmove != 0)
         {
  
-            transform.rotation = Quaternion.Euler(0f, 0f,  transform.eulerAngles.z+horizontalmove * rotationSpeed * Time.deltaTime) ;
+            transform.rotation = Quaternion.Euler(0f, 0f, - transform.eulerAngles.z-horizontalmove * rotationSpeed * Time.deltaTime) ;
         }
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButton("Jump"))
         {
             rb.velocity = new Vector2(runSpeed * Time.deltaTime* Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad),  runSpeed * Time.deltaTime *Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad));
+        }
+        if (Input.GetButtonUp("Jump"))
+        {
+            rb.velocity = new Vector2(0f,0f);
         }
     }
 }
