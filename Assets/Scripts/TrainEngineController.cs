@@ -8,6 +8,7 @@ public class TrainEngineController : MonoBehaviour
     public float rotationSpeed;
     private Rigidbody2D rb;
     public Collider2D coll;
+    public float rotateZ;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,8 @@ public class TrainEngineController : MonoBehaviour
         //转动
         if (horizontalmove != 0)
         {
-            transform.rotation = Quaternion.Euler(0.0f, 0.0f, transform.rotation.z + horizontalmove * rotationSpeed * Time.deltaTime); ;
+            rotateZ = transform.rotation.z;
+            transform.rotation = Quaternion.Euler(0f, 0f,  transform.eulerAngles.z+horizontalmove * rotationSpeed * Time.deltaTime) ;
         }
     }
 }
